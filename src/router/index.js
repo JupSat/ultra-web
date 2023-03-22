@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:05:25
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-21 16:05:39
+ * @LastEditTime: 2023-03-22 09:34:33
  */
 import { createRouter, createWebHashHistory } from "vue-router";
 import store from "../store";
@@ -34,7 +34,7 @@ const routes = [
     path: "/login",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/login.vue"),
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
 ];
 

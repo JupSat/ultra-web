@@ -29,10 +29,10 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-import { actions } from "@/micros";
+import { reactive } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import { actions } from '@/micros';
 
 export default {
   components: {},
@@ -42,8 +42,8 @@ export default {
     const Router = useRouter();
 
     const loginFrom = reactive({
-      name: "",
-      password: "",
+      name: '',
+      password: '',
     });
 
     // onMounted(() => {
@@ -54,14 +54,14 @@ export default {
     // })
 
     let loginIn = () => {
-      let token = loginFrom.name + "&" + loginFrom.password;
-      Store.commit("setToken", token);
+      let token = loginFrom.name + '&' + loginFrom.password;
+      Store.commit('setToken', token);
 
       //   微应用 通信
       actions.setGlobalState({ globalToken: token });
 
-      console.log("token", Store.state.token);
-      Router.push("/");
+      console.log('token', Store.state.token);
+      Router.push('/');
     };
 
     return { loginFrom, loginIn };

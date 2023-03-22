@@ -27,10 +27,10 @@
 </template>
 
 <script setup>
-import { reactive, toRefs, computed, watch, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useStore } from "vuex";
-import { actions } from "@/micros";
+import { reactive, toRefs, computed, watch, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { actions } from '@/micros';
 
 const router = useRouter();
 const route = useRoute();
@@ -39,28 +39,28 @@ const store = useStore();
 const state = reactive({
   menuList: [
     {
-      name: "home",
-      path: "/master-home",
-      btnName: "主-home",
+      name: 'home',
+      path: '/master-home',
+      btnName: '主-home',
     },
     {
-      name: "master-about",
-      path: "/master-about",
-      btnName: "主-about",
+      name: 'master-about',
+      path: '/master-about',
+      btnName: '主-about',
     },
     {
-      name: "micro-home",
-      path: "/vue2-micro-app/home",
-      btnName: "子-home",
+      name: 'micro-home',
+      path: '/vue2-micro-app/home',
+      btnName: '子-home',
     },
     {
-      name: "micro-about",
-      path: "/vue2-micro-app/about",
-      btnName: "子-about",
+      name: 'micro-about',
+      path: '/vue2-micro-app/about',
+      btnName: '子-about',
     },
   ],
   crumbsRouter: computed(() => {
-    let name = "";
+    let name = '';
     state.menuList.forEach((item) => {
       if (state.menuActive == item.path) {
         name = item.btnName;
@@ -76,19 +76,19 @@ const state = reactive({
 watch(
   () => route.path,
   (val, oval) => {
-    console.log("监听路由变化", val, oval);
+    console.log('监听路由变化', val, oval);
   }
 );
 
 onMounted(() => {
   actions.onGlobalStateChange((state) => {
     // state: 变更后的状态; prevState: 变更前的状态
-    console.log("主应用观察者：状态改变", state);
+    console.log('主应用观察者：状态改变', state);
     let token = state.globalToken;
-    store.commit("setToken", token);
-    console.log("kkkkkkkkkkk");
+    store.commit('setToken', token);
+    console.log('kkkkkkkkkkk');
 
-    console.log("jjjjj", store.state.token);
+    console.log('jjjjj', store.state.token);
   });
 });
 
@@ -101,8 +101,8 @@ let menuChangeRouter = (row) => {
 };
 
 let loginOut = () => {
-  store.commit("loginOut");
-  router.push("/login");
+  store.commit('loginOut');
+  router.push('/login');
 };
 
 let menuActive = computed(() => route.path);
