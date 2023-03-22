@@ -7,34 +7,34 @@
  * @LastEditors: JupSat
  * @LastEditTime: 2023-03-22 09:34:33
  */
-import { createRouter, createWebHashHistory } from "vue-router";
-import store from "../store";
+import { createRouter, createWebHashHistory } from 'vue-router';
+import store from '../store';
 
 const routes = [
   {
-    path: "/",
-    redirect: "/master-home",
+    path: '/',
+    redirect: '/master-home',
   },
   {
-    path: "/master-home",
-    name: "master-home",
+    path: '/master-home',
+    name: 'master-home',
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Home.vue"),
+      import(/* webpackChunkName: "about" */ '../views/Home.vue'),
   },
   {
-    path: "/master-about",
-    name: "master-about",
+    path: '/master-about',
+    name: 'master-about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
-    path: "/login",
-    name: "Login",
+    path: '/login',
+    name: 'Login',
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+      import(/* webpackChunkName: "login" */ '../views/Login.vue'),
   },
 ];
 
@@ -44,12 +44,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== "/login") {
+  if (to.path !== '/login') {
     if (store.state.token) {
       next();
     } else {
-      console.log("主应用 - 未登录 去登陆");
-      next("/login");
+      console.log('主应用 - 未登录 去登陆');
+      next('/login');
     }
   } else {
     next();

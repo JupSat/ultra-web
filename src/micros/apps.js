@@ -1,4 +1,4 @@
-import router from "@/router";
+import router from '@/router';
 // 获取环境变量中的子应用entry
 const { VUE_APP_MICRO_ENTRY } = process.env;
 const apps = [
@@ -9,10 +9,10 @@ const apps = [
    * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
    */
   {
-    name: "vue-micro-app",
+    name: 'vue-micro-app',
     entry: VUE_APP_MICRO_ENTRY,
-    container: "#micro-container",
-    activeRule: "#/vue2-micro-app",
+    container: '#micro-container',
+    activeRule: '#/vue2-micro-app',
     props: {
       router: router,
     },

@@ -5,11 +5,11 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 15:08:20
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-21 16:52:25
+ * @LastEditTime: 2023-03-22 14:53:49
  */
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-import Store from "../store";
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import store from '../store';
 
 // 注册微应用主应用
 import {
@@ -17,25 +17,24 @@ import {
   registerMicroApps,
   start,
   addGlobalUncaughtErrorHandler,
-} from "qiankun";
-import apps from "./apps";
+} from 'qiankun';
+import apps from './apps';
 
 // 微应用通信 定义全局状态，并返回通信方法
 const state = {};
 const actions = initGlobalState(state);
 actions.setGlobalState({
-  globalToken: "",
+  globalToken: '',
 });
-
 registerMicroApps(apps, {
   beforeLoad: (app) => {
     // 加载微应用前，加载进度条
     NProgress.start();
-    console.log("before load", app.name);
+    console.log('before load', app.name);
 
-    if (Store.state.token) {
+    if (store.state.token) {
       //  微应用加载检查登录 已登录 子应用直接传参登录
-      actions.setGlobalState({ globalToken: Store.state.token });
+      actions.setGlobalState({ globalToken: store.state.token });
     }
 
     return Promise.resolve();
@@ -43,7 +42,7 @@ registerMicroApps(apps, {
   afterMount: (app) => {
     // 加载微应用前，进度条加载完成
     NProgress.done();
-    console.log("after mount", app.name);
+    console.log('after mount', app.name);
     return Promise.resolve();
   },
 });
@@ -51,8 +50,8 @@ registerMicroApps(apps, {
 addGlobalUncaughtErrorHandler((event) => {
   console.error(event);
   const { message: msg } = event;
-  if (msg && msg.includes("died in status LOADING_SOURCE_CODE")) {
-    console.error("微应用加载失败，请检查应用是否可运行");
+  if (msg && msg.includes('died in status LOADING_SOURCE_CODE')) {
+    console.error('微应用加载失败，请检查应用是否可运行');
   }
 });
 
