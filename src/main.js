@@ -20,6 +20,6 @@ const Vue = createApp(App);
 Vue.use(store);
 Vue.use(router);
 Vue.use(ElementPlus, { size: 'small', zIndex: 3000 });
-Vue.mount('#app');
+Vue.mount('#app-base');
 
 start({ sandbox: { experimentalStyleIsolation: true } });

@@ -1,6 +1,15 @@
+/*
+ * @Description:
+ * @version:
+ * @Author: JupSat
+ * @email: jupsat@163.com
+ * @Date: 2023-03-21 15:08:31
+ * @LastEditors: JupSat
+ * @LastEditTime: 2023-03-23 23:13:33
+ */
 import router from '@/router';
 // 获取环境变量中的子应用entry
-const { VUE_APP_MICRO_ENTRY } = process.env;
+// const { VUE_APP_MICRO_ENTRY } = process.env;
 const apps = [
   /**
    * name: 微应用名称 - 具有唯一性
@@ -10,9 +19,18 @@ const apps = [
    */
   {
     name: 'vue-micro-app',
-    entry: VUE_APP_MICRO_ENTRY,
+    entry: '//localhost:8082',
     container: '#micro-container',
     activeRule: '#/vue2-micro-app',
+    props: {
+      router: router,
+    },
+  },
+  {
+    name: 'vue-mgt-tpl',
+    entry: '//localhost:8081',
+    container: '#micro-container',
+    activeRule: '#/vue-mgt-tpl',
     props: {
       router: router,
     },

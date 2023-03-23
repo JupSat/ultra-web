@@ -58,6 +58,11 @@ const state = reactive({
       path: '/vue2-micro-app/about',
       btnName: '子-about',
     },
+    {
+      name: 'tpl-home',
+      path: '/vue-mgt-tpl/home',
+      btnName: 'tpl-子-home',
+    },
   ],
   crumbsRouter: computed(() => {
     let name = '';
