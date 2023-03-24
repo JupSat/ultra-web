@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 10:00:11
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-22 09:31:42
+ * @LastEditTime: 2023-03-24 12:16:28
  */
 
 const { defineConfig } = require('@vue/cli-service');
@@ -46,23 +46,23 @@ module.exports = defineConfig({
     };
   },
   devServer: {
-    host: '0.0.0.0',
-    port:
-      process.env.NODE_ENV === 'test'
-        ? process.env.VUE_APP_PROJECT_RUN_PORT
-        : 8080,
+    host: 'localhost',
+    port: 8080,
     open: true,
+    historyApiFallback: true,
+    allowedHosts: 'all',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     proxy: {
       '/api': {
-        // 代理地址
-        target: 'http://xx.xx.xx.xxx:8009', // 目标代理接口地址,实际跨域要访问的接口,这个地址会替换掉 axios.defaults.baseURL
-        secure: false,
-        changeOrigin: true, // 开启代理，在本地创建一个虚拟服务端
-        ws: true, // 是否启用  websockets;
+        target: 'http://localhost:8082/',
         pathRewrite: {
-          // 去掉 路径中的  /api  的这一截
           '^/api': '',
         },
+        ws: true,
+        changeOrigin: true,
+        secure: false,
       },
     },
   },
