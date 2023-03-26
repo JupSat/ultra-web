@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 10:00:11
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-24 12:16:28
+ * @LastEditTime: 2023-03-26 19:04:56
  */
 
 const { defineConfig } = require('@vue/cli-service');
@@ -60,6 +60,13 @@ module.exports = defineConfig({
         pathRewrite: {
           '^/api': '',
         },
+        ws: true,
+        changeOrigin: true,
+        secure: false,
+      },
+      '/static/img': {
+        // 用于处理在子项目图片加载404的情况
+        target: 'http://xx.xx.xx.xx/', // 子项目字段部署地址
         ws: true,
         changeOrigin: true,
         secure: false,
