@@ -14,7 +14,6 @@
     <div class="app-content">
       <div class="app-header-content" v-show="appToken">
         <div>{{ crumbsRouter }}</div>
-        <div>Token： {{ appToken }}</div>
         <el-button type="primary" round @click="loginOut">退出登录</el-button>
       </div>
       <div class="app-container">
@@ -41,41 +40,22 @@ const state = reactive({
     {
       name: 'home',
       path: '/master-home',
-      btnName: '主-home',
-    },
-    {
-      name: 'master-about',
-      path: '/master-about',
-      btnName: '主-about',
-    },
-    {
-      name: 'micro-home',
-      path: '/vue2-micro-app/home',
-      btnName: '子-home',
-    },
-    {
-      name: 'micro-about',
-      path: '/vue2-micro-app/about',
-      btnName: '子-about',
+      btnName: '主项目-home',
     },
     {
       name: 'tpl-home',
       path: '/vue-mgt-tpl/home',
-      btnName: 'tpl-子-home',
+      btnName: '子项目-home',
     },
   ],
   crumbsRouter: computed(() => {
-    let name = '';
-    state.menuList.forEach((item) => {
-      if (state.menuActive == item.path) {
-        name = item.btnName;
-      }
-    });
-    return name;
+    const item = state.menuList.find((item) => state.menuActive == item.name);
+    return item ? item.btnName : '';
   }),
   // 从环境变量中取参数
   appId: process.env.VUE_APP_MICRO_ENTRY,
   appToken: computed(() => store.state.token),
+  isShowMenu: false,
 });
 
 watch(
@@ -91,8 +71,6 @@ onMounted(() => {
     console.log('主应用观察者：状态改变', state);
     let token = state.globalToken;
     store.commit('setToken', token);
-    console.log('kkkkkkkkkkk');
-
     console.log('jjjjj', store.state.token);
   });
 });
