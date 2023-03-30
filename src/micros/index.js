@@ -5,27 +5,24 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 15:08:20
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-29 12:44:04
+ * @LastEditTime: 2023-03-30 21:28:05
  */
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import store from '../store';
-
-// 注册微应用主应用
+import actions from './globalState';
 import {
-  initGlobalState,
-  registerMicroApps,
   start,
+  registerMicroApps,
   addGlobalUncaughtErrorHandler,
 } from 'qiankun';
 import apps from './apps';
 
 // 微应用通信 定义全局状态，并返回通信方法
-const state = {};
-const actions = initGlobalState(state);
 actions.setGlobalState({
   globalToken: '',
 });
+
 registerMicroApps(apps, {
   beforeLoad: (app) => {
     NProgress.start(); // 加载微应用前，加载进度条

@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:05:25
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-22 09:34:33
+ * @LastEditTime: 2023-03-29 12:45:04
  */
 import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '../store';
@@ -20,15 +20,6 @@ const routes = [
     name: 'master-home',
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/Home.vue'),
-  },
-  {
-    path: '/master-about',
-    name: 'master-about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
     path: '/login',
