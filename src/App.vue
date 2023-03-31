@@ -114,9 +114,10 @@ $leftWidth: 200px;
   background: #f6f7fc;
 }
 .app-nav {
+  position: absolute;
+  display: flex;
   width: $leftWidth;
   height: 100%;
-  display: flex;
   flex-direction: column;
   box-shadow: 2px 0px 10px 0px rgb(0, 47, 60, 0.2);
   padding: 20px;
@@ -140,25 +141,24 @@ $leftWidth: 200px;
   }
 }
 .app-content {
-  width: calc(100% - $leftWidth);
   height: 100%;
   .app-header-content {
-    padding: 0 20px;
-    width: 100%;
-    height: 50px;
-    background: #ffffff;
-    box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 8%);
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    background: #ffffff;
+    box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 8%);
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
   }
   .app-container {
     width: 100%;
-    height: calc(100% - 50px);
+    height: 100%;
     overflow: auto;
-    padding: 20px;
     box-sizing: border-box;
   }
 }
