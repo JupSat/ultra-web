@@ -8,7 +8,7 @@
  * @LastEditTime: 2023-03-29 12:45:48
 -->
 <template>
-  <div class="home">
+  <div class="app-home">
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -23,3 +23,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.app-home {
+  margin-top: 180px;
+  margin-left: 430px;
+}
+</style>

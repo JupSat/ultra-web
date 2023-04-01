@@ -107,10 +107,6 @@ body {
 }
 $leftWidth: 200px;
 .app-main {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100vh;
   background: #f6f7fc;
 }
 .app-nav {
