@@ -1,6 +1,6 @@
 <template>
   <div class="app-main">
-    <div class="app-nav" v-show="appToken">
+    <div class="app-nav" v-show="isShowMenu">
       <template v-for="menu in menuList" :key="menu.name">
         <div
           class="nav-a-btn"
@@ -13,6 +13,7 @@
     </div>
     <div class="app-content">
       <div class="app-header-content" v-show="appToken">
+        <ApplicationList @show-menu="showAppMenu" />
         <div>{{ crumbsRouter }}</div>
         <el-button type="primary" round @click="loginOut">退出登录</el-button>
       </div>
@@ -30,6 +31,7 @@ import { reactive, toRefs, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { actions } from '@/micros';
+import ApplicationList from '@/components/ApplicationList';
 
 const router = useRouter();
 const route = useRoute();
@@ -54,7 +56,7 @@ const state = reactive({
   }),
   // 从环境变量中取参数
   appId: process.env.VUE_APP_MICRO_ENTRY,
-  appToken: computed(() => store.state.token),
+  appToken: computed(() => store.state.token) || 'xxxxx',
   isShowMenu: false,
 });
 
@@ -88,8 +90,12 @@ let loginOut = () => {
   router.push('/login');
 };
 
-let menuActive = computed(() => route.path);
-let { menuList, crumbsRouter, appToken } = toRefs(state);
+const showAppMenu = (appId) => {
+  state.isShowMenu = appId ? true : false;
+};
+
+const menuActive = computed(() => route.path);
+const { menuList, crumbsRouter, appToken, isShowMenu } = toRefs(state);
 </script>
 
 <style lang="scss">
@@ -112,9 +118,10 @@ $leftWidth: 200px;
 .app-nav {
   position: absolute;
   display: flex;
-  width: $leftWidth;
-  height: 100%;
   flex-direction: column;
+  width: $leftWidth;
+  height: calc(100% - 50px);
+  margin-top: 50px;
   box-shadow: 2px 0px 10px 0px rgb(0, 47, 60, 0.2);
   padding: 20px;
   box-sizing: border-box;
