@@ -36,20 +36,23 @@ import ApplicationList from '@/components/ApplicationList';
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
+const routeList = [
+  {
+    name: 'home',
+    path: '/master-home',
+    btnName: '主项目-home',
+    index: 1,
+  },
+  {
+    name: 'tpl-home',
+    path: '/vue-mgt-tpl/home',
+    btnName: '子项目-home',
+    index: 2,
+  },
+];
 
 const state = reactive({
-  menuList: [
-    {
-      name: 'home',
-      path: '/master-home',
-      btnName: '主项目-home',
-    },
-    {
-      name: 'tpl-home',
-      path: '/vue-mgt-tpl/home',
-      btnName: '子项目-home',
-    },
-  ],
+  menuList: routeList,
   crumbsRouter: computed(() => {
     const item = state.menuList.find((item) => state.menuActive == item.name);
     return item ? item.btnName : '';
@@ -91,6 +94,7 @@ let loginOut = () => {
 };
 
 const showAppMenu = (appId) => {
+  state.menuList = routeList.filter((item) => item.index === appId);
   state.isShowMenu = appId ? true : false;
 };
 

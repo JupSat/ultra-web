@@ -9,7 +9,7 @@
     :before-close="handleClose"
   >
     <template #header>
-      <h4>选择应用</h4>
+      <h3>选择应用</h3>
     </template>
     <template #default>
       <div>
@@ -21,7 +21,7 @@
             >
           </li>
           <li>
-            <el-button type="text" size="26px" @click="showApp(1)"
+            <el-button type="text" size="26px" @click="showApp(2)"
               >子应用二</el-button
             >
           </li>
@@ -93,44 +93,18 @@
         </ul>
       </div>
     </template>
-    <template #footer>
-      <div style="flex: auto">
-        <el-button @click="cancelClick">cancel</el-button>
-        <el-button type="primary" @click="confirmClick">confirm</el-button>
-      </div>
-    </template>
   </el-drawer>
 </template>
 
 <script setup>
 import { ref, defineEmits } from 'vue';
-import { ElMessageBox } from 'element-plus';
 
 const drawer = ref(false);
 const direction = ref('ttb');
-const radio1 = ref('Option 1');
 
 const handleClose = () => {
-  ElMessageBox.confirm('Are you sure you want to close this?')
-    .then(() => {
-      drawer.value = false;
-    })
-    .catch(() => {
-      // catch error
-    });
-};
-function cancelClick() {
   drawer.value = false;
-}
-function confirmClick() {
-  ElMessageBox.confirm(`Are you confirm to chose ${radio1.value} ?`)
-    .then(() => {
-      drawer.value = false;
-    })
-    .catch(() => {
-      // catch error
-    });
-}
+};
 const emit = defineEmits(['showMenu']);
 function showApp(id) {
   drawer.value = false;
@@ -140,7 +114,11 @@ function showApp(id) {
 
 <style>
 .el-drawer {
-  height: 80% !important;
+  height: 60% !important;
+}
+
+.el-drawer__header {
+  margin-bottom: -45px !important;
 }
 h3 {
   margin: 40px 0 0;
