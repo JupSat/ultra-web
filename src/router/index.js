@@ -7,8 +7,8 @@
  * @LastEditors: JupSat
  * @LastEditTime: 2023-03-29 12:45:04
  */
-import { createRouter, createWebHashHistory } from 'vue-router';
-import store from '../store';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '../store'
 
 const routes = [
   {
@@ -27,24 +27,24 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ '../views/Login.vue'),
   },
-];
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-});
+})
 
 router.beforeEach((to, from, next) => {
   if (to.path !== '/login') {
     if (store.state.token) {
-      next();
+      next()
     } else {
-      console.log('主应用 - 未登录 去登陆');
-      next('/login');
+      console.log('主应用 - 未登录 去登陆')
+      next('/login')
     }
   } else {
-    next();
+    next()
   }
-});
+})
 
-export default router;
+export default router

@@ -97,18 +97,18 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits } from 'vue'
 
-const drawer = ref(false);
-const direction = ref('ttb');
+const drawer = ref(false)
+const direction = ref('ttb')
 
 const handleClose = () => {
-  drawer.value = false;
-};
-const emit = defineEmits(['showMenu']);
+  drawer.value = false
+}
+const emit = defineEmits(['showMenu'])
 function showApp(id) {
-  drawer.value = false;
-  emit('showMenu', id);
+  drawer.value = false
+  emit('showMenu', id)
 }
 </script>
 

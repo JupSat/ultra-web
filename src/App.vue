@@ -27,15 +27,15 @@
 </template>
 
 <script setup>
-import { reactive, toRefs, computed, watch, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-import { actions } from '@/micros';
-import ApplicationList from '@/components/ApplicationList';
+import { reactive, toRefs, computed, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { actions } from '@/micros'
+import ApplicationList from '@/components/ApplicationList'
 
-const router = useRouter();
-const route = useRoute();
-const store = useStore();
+const router = useRouter()
+const route = useRoute()
+const store = useStore()
 const routeList = [
   {
     name: 'home',
@@ -49,57 +49,57 @@ const routeList = [
     btnName: '子项目-home',
     index: 2,
   },
-];
+]
 
 const state = reactive({
   menuList: routeList,
   crumbsRouter: computed(() => {
-    const item = state.menuList.find((item) => state.menuActive == item.name);
-    return item ? item.btnName : '';
+    const item = state.menuList.find((item) => state.menuActive == item.name)
+    return item ? item.btnName : ''
   }),
   // 从环境变量中取参数
   appId: process.env.VUE_APP_MICRO_ENTRY,
   appToken: computed(() => store.state.token) || 'xxxxx',
   isShowMenu: false,
-});
+})
 
 watch(
   () => route.path,
   (val, oval) => {
-    console.log('监听路由变化', val, oval);
+    console.log('监听路由变化', val, oval)
   }
-);
+)
 
 onMounted(() => {
   actions.onGlobalStateChange((state) => {
     // state: 变更后的状态; prevState: 变更前的状态
-    console.log('主应用观察者：状态改变', state);
-    let token = state.globalToken;
-    store.commit('setToken', token);
-    console.log('jjjjj', store.state.token);
-  });
-});
+    console.log('主应用观察者：状态改变', state)
+    let token = state.globalToken
+    store.commit('setToken', token)
+    console.log('jjjjj', store.state.token)
+  })
+})
 
 let menuChangeRouter = (row) => {
-  state.menuActive = row.name;
+  state.menuActive = row.name
   // 路由跳转方式
-  router.push({ path: row.path });
+  router.push({ path: row.path })
   // 跳转方法二
   //  window.history.pushState({}, '', '/#'+row.path)
-};
+}
 
 let loginOut = () => {
-  store.commit('loginOut');
-  router.push('/login');
-};
+  store.commit('loginOut')
+  router.push('/login')
+}
 
 const showAppMenu = (appId) => {
-  state.menuList = routeList.filter((item) => item.index === appId);
-  state.isShowMenu = appId ? true : false;
-};
+  state.menuList = routeList.filter((item) => item.index === appId)
+  state.isShowMenu = appId ? true : false
+}
 
-const menuActive = computed(() => route.path);
-const { menuList, crumbsRouter, appToken, isShowMenu } = toRefs(state);
+const menuActive = computed(() => route.path)
+const { menuList, crumbsRouter, appToken, isShowMenu } = toRefs(state)
 </script>
 
 <style lang="scss">
