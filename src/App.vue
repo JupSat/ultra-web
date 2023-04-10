@@ -169,30 +169,4 @@ $leftWidth: 200px;
     box-sizing: border-box;
   }
 }
-
-/* S 修改滚动条默认样式 */
-::-webkit-scrollbar {
-  width: 8px;
-  background: white;
-}
-
-::-webkit-scrollbar-corner,
-   /* 滚动条角落 */
-::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-track {
-  /*滚动条的轨道*/
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-corner,
-::-webkit-scrollbar-track {
-  /* 滚动条轨道 */
-  background-color: rgba(180, 160, 120, 0.1);
-  box-shadow: inset 0 0 1px rgba(180, 160, 120, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  /* 滚动条手柄 */
-  background-color: #00adb5;
-}
 </style>
