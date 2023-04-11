@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-04-10 15:36:29
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-10 17:30:16
+ * @LastEditTime: 2023-04-11 09:36:49
 -->
 <template>
   <div class="chart-example">
@@ -19,6 +19,22 @@
     </div>
     <div class="example-content2">
       <div id="chartId3" class="body-chart"></div>
+    </div>
+    <div class="example-table">
+      <el-table :data="tableData" style="width: 100%">
+        <el-table-column prop="date" label="Date" width="150" :align="'center'">
+          <el-table-column prop="state" label="State" width="120" />
+          <el-table-column prop="city" label="City" width="120" />
+          <el-table-column prop="address" label="Address" />
+          <el-table-column prop="zip" label="Zip" width="120" />
+        </el-table-column>
+        <el-table-column label="Delivery Info" :align="'center'">
+          <el-table-column prop="state" label="State" width="120" />
+          <el-table-column prop="city" label="City" width="120" />
+          <el-table-column prop="address" label="Address" />
+          <el-table-column prop="zip" label="Zip" width="120" />
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
@@ -214,6 +230,64 @@ const getLastYearDates = () => {
   console.log('list', dates)
   return dates.reverse()
 }
+const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-08',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-06',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-07',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+]
 </script>
 
 <style lang="scss" scoped>
