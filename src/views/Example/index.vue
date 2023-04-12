@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-04-10 15:36:29
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-11 09:36:49
+ * @LastEditTime: 2023-04-12 12:36:58
 -->
 <template>
   <div class="chart-example">
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
 
 const setEChartsLine = () => {
@@ -203,8 +203,21 @@ const initECharts = () => {
   setEChartsBar2()
 }
 
+const resize = () => {
+  initECharts()
+}
+
 onMounted(() => {
   initECharts()
+  window.addEventListener('resize', () => {
+    resize()
+  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', () => {
+    resize()
+  })
 })
 
 const getLastYearDates = () => {
@@ -292,7 +305,7 @@ const tableData = [
 
 <style lang="scss" scoped>
 .chart-example {
-  width: 100%;
+  width: 100vw;
   //   text-align: center;
   .example-content {
     display: flex;
@@ -312,5 +325,9 @@ const tableData = [
 .body-chart {
   width: 100%;
   height: 100%;
+}
+
+.example-table {
+  width: 100%;
 }
 </style>

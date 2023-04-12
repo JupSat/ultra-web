@@ -150,10 +150,11 @@ $leftWidth: 200px;
 .app-content {
   height: 100%;
   .app-header-content {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 999;
     width: 100%;
     height: 50px;
     padding: 0 20px;
@@ -165,7 +166,7 @@ $leftWidth: 200px;
   .app-container {
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
   }
 }
