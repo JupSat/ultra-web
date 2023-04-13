@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-04-10 15:36:29
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-13 13:01:47
+ * @LastEditTime: 2023-04-13 15:34:16
 -->
 <template>
   <div class="chart-example">
@@ -70,16 +70,19 @@
       <div>el-checkbox内部添加内容，但点击不触发选中</div>
       <el-checkbox-group v-model="checkList">
         <el-checkbox label="Option A" />
-        <el-checkbox label="Option B" />
-        <el-checkbox label="Option C">
-          <span @click.stop="($event) => $event.preventDefault()"
-            >Some inner content</span
-          >
+        <el-checkbox label="Option B">
+          <div style="display: flex; align-items: center">
+            <div>测试</div>
+            <div @click.stop="($event) => $event.preventDefault()">
+              <el-input v-model="inputVal" clearable></el-input>
+            </div>
+          </div>
         </el-checkbox>
       </el-checkbox-group>
     </div>
   </div>
   <div class="icon-example">
+    <div>自定义图标</div>
     <div class="warning-icon"></div>
   </div>
 </template>
@@ -347,6 +350,8 @@ const tableData = [
   },
 ]
 
+const inputVal = ref('')
+
 const checkList = ref([])
 </script>
 
@@ -376,6 +381,10 @@ const checkList = ref([])
 
 .example-table {
   width: 100%;
+}
+
+.icon-example {
+  margin-top: 20px;
 }
 
 .warning-icon::before {
