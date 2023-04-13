@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-04-10 15:36:29
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-12 12:36:58
+ * @LastEditTime: 2023-04-13 13:01:47
 -->
 <template>
   <div class="chart-example">
@@ -23,19 +23,64 @@
     <div class="example-table">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="date" label="Date" width="150" :align="'center'">
-          <el-table-column prop="state" label="State" width="120" />
-          <el-table-column prop="city" label="City" width="120" />
-          <el-table-column prop="address" label="Address" />
-          <el-table-column prop="zip" label="Zip" width="120" />
+          <el-table-column
+            prop="state"
+            label="State"
+            width="120"
+            :align="'center'"
+          />
+          <el-table-column
+            prop="city"
+            label="City"
+            width="120"
+            :align="'center'"
+          />
+          <el-table-column prop="address" label="Address" :align="'center'" />
+          <el-table-column
+            prop="zip"
+            label="Zip"
+            width="120"
+            :align="'center'"
+          />
         </el-table-column>
         <el-table-column label="Delivery Info" :align="'center'">
-          <el-table-column prop="state" label="State" width="120" />
-          <el-table-column prop="city" label="City" width="120" />
-          <el-table-column prop="address" label="Address" />
-          <el-table-column prop="zip" label="Zip" width="120" />
+          <el-table-column
+            prop="state"
+            label="State"
+            width="120"
+            :align="'center'"
+          />
+          <el-table-column
+            prop="city"
+            label="City"
+            width="120"
+            :align="'center'"
+          />
+          <el-table-column prop="address" label="Address" :align="'center'" />
+          <el-table-column
+            prop="zip"
+            label="Zip"
+            width="120"
+            :align="'center'"
+          />
         </el-table-column>
       </el-table>
     </div>
+    <div>
+      <div>el-checkbox内部添加内容，但点击不触发选中</div>
+      <el-checkbox-group v-model="checkList">
+        <el-checkbox label="Option A" />
+        <el-checkbox label="Option B" />
+        <el-checkbox label="Option C">
+          <span @click.stop="($event) => $event.preventDefault()"
+            >Some inner content</span
+          >
+        </el-checkbox>
+      </el-checkbox-group>
+    </div>
+  </div>
+  <div class="icon-example">
+    <div class="warning-icon"></div>
   </div>
 </template>
 
@@ -46,7 +91,7 @@ export default {
 </script>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import * as echarts from 'echarts'
 
 const setEChartsLine = () => {
@@ -301,6 +346,8 @@ const tableData = [
     zip: 'CA 90036',
   },
 ]
+
+const checkList = ref([])
 </script>
 
 <style lang="scss" scoped>
@@ -329,5 +376,19 @@ const tableData = [
 
 .example-table {
   width: 100%;
+}
+
+.warning-icon::before {
+  content: '!';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: #60621f;
+  // font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  line-height: 20px;
+  border: 2px solid #606266;
+  border-radius: 50%;
 }
 </style>
