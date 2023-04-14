@@ -12,6 +12,7 @@ module.exports = {
     'import/first': 0, // 不允许将导入声明放置在标有setup的script标签中
     'space-before-function-paren': 0, // 在函数定义左括号前强制保持一致间距
     'vue/multi-word-component-names': 'off',
+    semi: ['error', 'never'],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-unreachable': 2, // 不允许在return、throw、continue和break语句后出现无法访问的代码
@@ -46,4 +47,4 @@ module.exports = {
       },
     ],
   },
-};
+}

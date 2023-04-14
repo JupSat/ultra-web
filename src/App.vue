@@ -1,6 +1,6 @@
 <template>
   <div class="app-main">
-    <div class="app-nav" v-show="appToken">
+    <div class="app-nav" v-show="isShowMenu">
       <template v-for="menu in menuList" :key="menu.name">
         <div
           class="nav-a-btn"
@@ -13,6 +13,7 @@
     </div>
     <div class="app-content">
       <div class="app-header-content" v-show="appToken">
+        <ApplicationList @show-menu="showAppMenu" />
         <div>{{ crumbsRouter }}</div>
         <el-button type="primary" round @click="loginOut">退出登录</el-button>
       </div>
@@ -26,70 +27,79 @@
 </template>
 
 <script setup>
-import { reactive, toRefs, computed, watch, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-import { actions } from '@/micros';
+import { reactive, toRefs, computed, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { actions } from '@/micros'
+import ApplicationList from '@/components/ApplicationList'
 
-const router = useRouter();
-const route = useRoute();
-const store = useStore();
+const router = useRouter()
+const route = useRoute()
+const store = useStore()
+const routeList = [
+  {
+    name: 'home',
+    path: '/master-home',
+    btnName: '主项目-home',
+    index: 1,
+  },
+  {
+    name: 'tpl-home',
+    path: '/vue-mgt-tpl/home',
+    btnName: '子项目-home',
+    index: 2,
+  },
+]
 
 const state = reactive({
-  menuList: [
-    {
-      name: 'home',
-      path: '/master-home',
-      btnName: '主项目-home',
-    },
-    {
-      name: 'tpl-home',
-      path: '/vue-mgt-tpl/home',
-      btnName: '子项目-home',
-    },
-  ],
+  menuList: routeList,
   crumbsRouter: computed(() => {
-    const item = state.menuList.find((item) => state.menuActive == item.name);
-    return item ? item.btnName : '';
+    const item = state.menuList.find((item) => state.menuActive == item.name)
+    return item ? item.btnName : ''
   }),
   // 从环境变量中取参数
   appId: process.env.VUE_APP_MICRO_ENTRY,
-  appToken: computed(() => store.state.token),
+  appToken: computed(() => store.state.token) || 'xxxxx',
   isShowMenu: false,
-});
+})
 
 watch(
   () => route.path,
   (val, oval) => {
-    console.log('监听路由变化', val, oval);
+    console.log('监听路由变化', val, oval)
   }
-);
+)
 
 onMounted(() => {
   actions.onGlobalStateChange((state) => {
     // state: 变更后的状态; prevState: 变更前的状态
-    console.log('主应用观察者：状态改变', state);
-    let token = state.globalToken;
-    store.commit('setToken', token);
-    console.log('jjjjj', store.state.token);
-  });
-});
+    console.log('主应用观察者：状态改变', state)
+    let token = state.globalToken
+    store.commit('setToken', token)
+    console.log('jjjjj', store.state.token)
+  })
+})
 
 let menuChangeRouter = (row) => {
-  state.menuActive = row.name;
+  state.menuActive = row.name
   // 路由跳转方式
-  router.push({ path: row.path });
+  router.push({ path: row.path })
   // 跳转方法二
   //  window.history.pushState({}, '', '/#'+row.path)
-};
+}
 
 let loginOut = () => {
-  store.commit('loginOut');
-  router.push('/login');
-};
+  store.commit('loginOut')
+  router.push('/login')
+}
 
-let menuActive = computed(() => route.path);
-let { menuList, crumbsRouter, appToken } = toRefs(state);
+const showAppMenu = (appId) => {
+  state.menuList = routeList.filter((item) => item.index === appId)
+  state.isShowMenu = appId ? true : false
+}
+
+const menuActive = computed(() => route.path)
+const { menuList, crumbsRouter, appToken, isShowMenu } = toRefs(state)
 </script>
 
 <style lang="scss">
@@ -107,18 +117,15 @@ body {
 }
 $leftWidth: 200px;
 .app-main {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100vh;
   background: #f6f7fc;
 }
 .app-nav {
   position: absolute;
   display: flex;
-  width: $leftWidth;
-  height: 100%;
   flex-direction: column;
+  width: $leftWidth;
+  height: calc(100% - 50px);
+  margin-top: 50px;
   box-shadow: 2px 0px 10px 0px rgb(0, 47, 60, 0.2);
   padding: 20px;
   box-sizing: border-box;
@@ -143,10 +150,11 @@ $leftWidth: 200px;
 .app-content {
   height: 100%;
   .app-header-content {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 999;
     width: 100%;
     height: 50px;
     padding: 0 20px;
@@ -158,34 +166,8 @@ $leftWidth: 200px;
   .app-container {
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
   }
-}
-
-/* S 修改滚动条默认样式 */
-::-webkit-scrollbar {
-  width: 8px;
-  background: white;
-}
-
-::-webkit-scrollbar-corner,
-   /* 滚动条角落 */
-::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-track {
-  /*滚动条的轨道*/
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-corner,
-::-webkit-scrollbar-track {
-  /* 滚动条轨道 */
-  background-color: rgba(180, 160, 120, 0.1);
-  box-shadow: inset 0 0 1px rgba(180, 160, 120, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  /* 滚动条手柄 */
-  background-color: #00adb5;
 }
 </style>

@@ -7,7 +7,7 @@
  * @LastEditors: JupSat
  * @LastEditTime: 2023-03-30 21:31:42
  */
-import { initGlobalState } from 'qiankun';
+import { initGlobalState } from 'qiankun'
 
 export const initialState = {
   userInfo: null,
@@ -18,6 +18,6 @@ export const initialState = {
     currentModuleName: '',
   },
   globalToken: '',
-};
+}
 
-export default initGlobalState(initialState);
+export default initGlobalState(initialState)
