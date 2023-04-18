@@ -169,7 +169,7 @@ const setEChartsBar = () => {
     grid: {
       left: '3%',
       right: '4%',
-      bottom: '15%',
+      bottom: '22%',
       containLabel: true,
     },
     xAxis: {
