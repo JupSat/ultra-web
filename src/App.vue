@@ -9,6 +9,16 @@
         >
           {{ menu.btnName }}
         </div>
+        <div class="collapse">
+          <span @click="changeCollapse">
+            <el-affix>
+              <el-icon size="16" :color="'#8f9bb3'">
+                <DArrowLeft v-if="!isCollapse" />
+                <DArrowRight v-else />
+              </el-icon>
+            </el-affix>
+          </span>
+        </div>
       </template>
     </div>
     <div class="app-content">
@@ -61,7 +71,12 @@ const state = reactive({
   appId: process.env.VUE_APP_MICRO_ENTRY,
   appToken: computed(() => store.state.token) || 'xxxxx',
   isShowMenu: false,
+  isCollapse: false,
 })
+
+const changeCollapse = () => {
+  state.isCollapse = !state.isCollapse
+}
 
 watch(
   () => route.path,
@@ -99,7 +114,8 @@ const showAppMenu = (appId) => {
 }
 
 const menuActive = computed(() => route.path)
-const { menuList, crumbsRouter, appToken, isShowMenu } = toRefs(state)
+const { menuList, crumbsRouter, appToken, isShowMenu, isCollapse } =
+  toRefs(state)
 </script>
 
 <style lang="scss">
@@ -168,6 +184,22 @@ $leftWidth: 200px;
     height: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
+  }
+}
+.collapse {
+  width: 200px;
+  height: 100%;
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 82px;
+    text-align: right;
+    top: 35%;
+    border-radius: 0 5px 5px 0;
+    background-color: #fff !important;
+    cursor: pointer;
   }
 }
 </style>
