@@ -1,15 +1,23 @@
 <template>
   <div class="app-main">
-    <div class="app-nav" v-show="isShowMenu">
+    <div
+      class="app-nav"
+      v-show="isShowMenu"
+      :style="{
+        width: isCollapse ? '0' : '200px',
+        padding: isCollapse ? '0' : '20px',
+      }"
+    >
       <template v-for="menu in menuList" :key="menu.name">
         <div
+          v-if="!isCollapse"
           class="nav-a-btn"
           :class="{ 'router-active': menuActive == menu.path }"
           @click="menuChangeRouter(menu)"
         >
           {{ menu.btnName }}
         </div>
-        <div class="collapse">
+        <div class="collapse" :style="{ width: isCollapse ? '10px' : '200px' }">
           <span @click="changeCollapse">
             <el-affix>
               <el-icon size="16" :color="'#8f9bb3'">
@@ -187,18 +195,19 @@ $leftWidth: 200px;
   }
 }
 .collapse {
-  width: 200px;
   height: 100%;
   span {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: relative;
+    position: absolute;
     height: 82px;
     text-align: right;
     top: 35%;
+    right: -16px;
     border-radius: 0 5px 5px 0;
-    background-color: #fff !important;
+    // background-color: #fff !important;
+    background-color: rgb(26, 23, 56) !important;
     cursor: pointer;
   }
 }
