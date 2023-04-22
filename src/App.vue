@@ -2,7 +2,6 @@
   <div class="app-main">
     <div
       class="app-nav"
-      v-show="isShowMenu"
       :style="{
         width: isCollapse ? '0' : '200px',
         padding: isCollapse ? '0' : '20px',
@@ -70,7 +69,7 @@ const routeList = [
 ]
 
 const state = reactive({
-  menuList: routeList,
+  menuList: routeList.filter((item) => item.index === 1),
   crumbsRouter: computed(() => {
     const item = state.menuList.find((item) => state.menuActive == item.name)
     return item ? item.btnName : ''
@@ -118,12 +117,14 @@ let loginOut = () => {
 
 const showAppMenu = (appId) => {
   state.menuList = routeList.filter((item) => item.index === appId)
-  state.isShowMenu = appId ? true : false
+  if (!state.menuList.length) {
+    state.menuList = routeList.filter((item) => item.index === 1)
+  }
+  // state.isShowMenu = appId ? true : false
 }
 
 const menuActive = computed(() => route.path)
-const { menuList, crumbsRouter, appToken, isShowMenu, isCollapse } =
-  toRefs(state)
+const { menuList, crumbsRouter, appToken, isCollapse } = toRefs(state)
 </script>
 
 <style lang="scss">
