@@ -1,9 +1,7 @@
 <template>
   <div class="chart-example">
-    <div class="example-content">
-      <div class="front-card-body">
-        <div id="gaugeId" class="body-chart"></div>
-      </div>
+    <div class="card-body">
+      <div id="gaugeId" class="body-chart"></div>
     </div>
   </div>
 </template>
@@ -17,6 +15,7 @@ export default {
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
+import { debounce } from 'lodash'
 
 const setEChartsLine = () => {
   const chart1 = document.getElementById('gaugeId')
@@ -107,29 +106,33 @@ const resize = () => {
 
 onMounted(() => {
   initECharts()
-  window.addEventListener('resize', () => {
-    resize()
-  })
+  window.addEventListener(
+    'resize',
+    debounce(() => {
+      resize()
+    }, 300)
+  )
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', () => {
-    resize()
-  })
+  window.removeEventListener(
+    'resize',
+    debounce(() => {
+      resize()
+    }, 300)
+  )
 })
 </script>
 
 <style lang="scss" scoped>
 .chart-example {
   width: 100vw;
-}
-
-.front-card-body {
-  width: 812px;
-  height: 520px;
-  .body-chart {
-    width: 100%;
-    height: 420px;
+  .card-body {
+    height: 520px;
+    .body-chart {
+      width: 420px;
+      height: 420px;
+    }
   }
 }
 </style>

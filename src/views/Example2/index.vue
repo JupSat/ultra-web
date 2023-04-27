@@ -39,6 +39,7 @@ export default {
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
+import { debounce } from 'lodash'
 
 const setEChartPie = () => {
   const chart1 = document.getElementById('exampleCharId1')
@@ -144,15 +145,27 @@ const resize = () => {
 
 onMounted(() => {
   initECharts()
-  window.addEventListener('resize', () => {
-    resize()
-  })
+  window.addEventListener(
+    'resize',
+    window.addEventListener(
+      'resize',
+      debounce(() => {
+        resize()
+      }, 300)
+    )
+  )
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', () => {
-    resize()
-  })
+  window.removeEventListener(
+    'resize',
+    window.addEventListener(
+      'resize',
+      debounce(() => {
+        resize()
+      }, 300)
+    )
+  )
 })
 
 const getLastYearDates = () => {
@@ -199,7 +212,7 @@ const getLastYearDates = () => {
 }
 
 .body-chart {
-  width: 100%;
+  width: 812px;
   height: 100%;
 }
 
