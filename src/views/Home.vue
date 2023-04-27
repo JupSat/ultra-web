@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:11:32
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-26 16:28:01
+ * @LastEditTime: 2023-04-27 15:22:17
 -->
 <template>
   <div class="app-home">
@@ -26,7 +26,9 @@
         <span>加法等于:{{ addNum }}</span> <br />
         <span>减法等于:{{ subNum }}</span>
       </el-tab-pane>
-      <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
+      <el-tab-pane label="Chart" name="fourth">
+        <gauge-chart></gauge-chart>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -42,6 +44,7 @@ import { nextTick, ref } from 'vue'
 // import HelloWorld from '@/components/HelloWorld.vue'
 import Example from './Example'
 import Example2 from './Example2'
+import GaugeChart from '@/components/widgets/echarts/Gauge'
 import useAdd from '@/hooks/useAdd.js' //引入自动hook
 import { useSub } from '@/hooks/useSub.js' //引入自动hook
 
