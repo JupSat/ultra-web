@@ -5,11 +5,9 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 15:08:31
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-23 23:13:33
+ * @LastEditTime: 2023-04-05 12:34:30
  */
-import router from '@/router';
-// 获取环境变量中的子应用entry
-// const { VUE_APP_MICRO_ENTRY } = process.env;
+import router from '@/router'
 const apps = [
   /**
    * name: 微应用名称 - 具有唯一性
@@ -28,12 +26,12 @@ const apps = [
   },
   {
     name: 'vue-mgt-tpl',
-    entry: '//localhost:8081',
+    entry: '//localhost:8081', // '//www.jupsat.top',
     container: '#micro-container',
     activeRule: '#/vue-mgt-tpl',
     props: {
       router: router,
     },
   },
-];
-export default apps;
+]
+export default apps

@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:05:25
  * @LastEditors: JupSat
- * @LastEditTime: 2023-03-29 12:45:04
+ * @LastEditTime: 2023-04-28 21:38:40
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
@@ -19,14 +19,14 @@ const routes = [
     path: '/master-home',
     name: 'master-home',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+      import(/* webpackChunkName: "about" */ '../views/Basics/Home'),
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () =>
-      import(/* webpackChunkName: "login" */ '../views/Login.vue'),
-  },
+  // {
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: () =>
+  //     import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+  // },
 ]
 
 const router = createRouter({

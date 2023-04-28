@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 11:23:56
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-22 15:50:28
+ * @LastEditTime: 2023-04-28 21:52:31
  */
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
@@ -13,6 +13,7 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// import { store } from '@/pinia'
 import '@/styles/index.scss'
 import start from '@/micros'
 import i18n from '@/language'
