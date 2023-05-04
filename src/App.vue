@@ -11,7 +11,7 @@
         <div
           v-if="!isCollapse"
           class="nav-a-btn"
-          :class="{ 'router-active': menuActive == menu.path }"
+          :class="{ 'router-active': menuActive === menu.path }"
           @click="menuChangeRouter(menu)"
         >
           {{ menu.btnName }}
@@ -30,7 +30,7 @@
     </div>
     <div class="app-content">
       <div class="app-header-content" v-show="appToken">
-        <ApplicationList @show-menu="showAppMenu" />
+        <AppList @show-menu="showAppMenu" />
         <div>{{ crumbsRouter }}</div>
         <el-button type="primary" round @click="loginOut">退出登录</el-button>
       </div>
@@ -46,13 +46,16 @@
 <script setup>
 import { reactive, toRefs, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
+import { useMasterStore } from '@/pinia/modules/master'
+
 import { actions } from '@/micros'
-import ApplicationList from '@/components/ApplicationList'
+import AppList from '@/components/AppList'
 
 const router = useRouter()
 const route = useRoute()
-const store = useStore()
+// const store = useStore()
+
 const routeList = [
   {
     name: 'home',
@@ -76,7 +79,7 @@ const state = reactive({
   }),
   // 从环境变量中取参数
   appId: process.env.VUE_APP_MICRO_ENTRY,
-  appToken: computed(() => store.state.token) || 'xxxxx',
+  appToken: computed(() => useMasterStore.token) || 'xxxxx',
   isShowMenu: false,
   isCollapse: false,
 })
