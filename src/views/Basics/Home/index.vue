@@ -39,7 +39,6 @@ export default {
 }
 </script>
 <script setup>
-// import Login from './../Login'
 import Login from './../Login'
 
 import ResetPassword from './../ResetPwd'
@@ -160,6 +159,7 @@ const { showLoading, showLogin, isDependency } = toRefs(state)
       position: absolute;
       bottom: 15px;
       font-size: 13px;
+      color: #fff;
 
       a:first-child {
         img {

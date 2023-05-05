@@ -1,6 +1,7 @@
 <template>
   <div class="app-main">
     <div
+      v-if="useMasterStore.token"
       class="app-nav"
       :style="{
         width: isCollapse ? '0' : '200px',
