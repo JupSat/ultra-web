@@ -1,14 +1,5 @@
-<!--
- * @Description: 
- * @version: 
- * @Author: JupSat
- * @email: jupsat@163.com
- * @Date: 2023-03-21 16:11:32
- * @LastEditors: JupSat
- * @LastEditTime: 2023-04-27 15:22:17
--->
 <template>
-  <div class="app-home">
+  <div class="app-home" v-if="useMasterStore.token">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="Example" name="first">
@@ -31,22 +22,27 @@
       </el-tab-pane>
     </el-tabs>
   </div>
+  <div v-else>
+    <Home></Home>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Main',
 }
 </script>
 
 <script setup>
 import { nextTick, ref } from 'vue'
 // import HelloWorld from '@/components/HelloWorld.vue'
-import Example from './Example'
-import Example2 from './Example2'
+import Home from '@/views/Basics/Home'
+import Example from './../Example'
+import Example2 from './../Example2'
 import GaugeChart from '@/components/widgets/echarts/Gauge'
 import useAdd from '@/hooks/useAdd.js' //引入自动hook
 import { useSub } from '@/hooks/useSub.js' //引入自动hook
+import { useMasterStore } from '@/pinia/modules/master'
 
 const num1 = ref(2)
 const num2 = ref(1)

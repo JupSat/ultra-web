@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:05:25
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-28 21:38:40
+ * @LastEditTime: 2023-05-07 21:15:17
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
@@ -18,8 +18,7 @@ const routes = [
   {
     path: '/master-home',
     name: 'master-home',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Basics/Home'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/Main'),
   },
   // {
   //   path: '/login',
