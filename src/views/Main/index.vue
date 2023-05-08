@@ -1,6 +1,14 @@
+<!--
+ * @Description: 
+ * @version: 
+ * @Author: JupSat
+ * @email: jupsat@163.com
+ * @Date: 2023-03-21 16:11:32
+ * @LastEditors: JupSat
+ * @LastEditTime: 2023-05-08 21:50:17
+-->
 <template>
-  <div class="app-home" v-if="useMasterStore.token">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+  <div class="app-home" v-if="isShow">
     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="Example" name="first">
         <Example></Example>
@@ -34,7 +42,7 @@ export default {
 </script>
 
 <script setup>
-import { nextTick, ref } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 // import HelloWorld from '@/components/HelloWorld.vue'
 import Home from '@/views/Basics/Home'
 import Example from './../Example'
@@ -59,6 +67,7 @@ const handleClick = (event) => {
   console.log('event', event)
   nextTick()
 }
+const isShow = computed(() => (useMasterStore().token ? true : false))
 </script>
 <style scoped>
 .app-home {

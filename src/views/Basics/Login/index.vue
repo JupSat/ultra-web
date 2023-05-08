@@ -91,12 +91,13 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { loginApi, getGraphCaptchaApi } from '@/api/user'
 import { useUserStore } from '@/pinia/modules/user'
+import { useMasterStore } from '@/pinia/modules/master'
+
 import Register from './../Register'
 import Language from '@/components/Language'
 import { regUserName, regLoginPwd, getValidator } from '@/utils/validate'
 import { message } from '@/utils/message'
 // import microActions from '@/qiankun/qiankun-actions'
-
 const router = useRouter()
 
 const state = reactive({
@@ -155,6 +156,7 @@ const submitForm = () => {
         if (code === 0) {
           message(t('LoginSucJumping'))
           formData.token = data
+          useMasterStore().setToken(data)
           useUserStore().setUserInfo(formData)
           // 变更父项目参数token
           // microActions.setGlobalState({ globalToken: data })
