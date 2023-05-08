@@ -5,9 +5,10 @@
  * @email: jupsat@163.com
  * @Date: 2023-05-04 12:34:32
  * @LastEditors: JupSat
- * @LastEditTime: 2023-05-08 21:52:03
+ * @LastEditTime: 2023-05-08 22:05:04
  */
 import { defineStore } from 'pinia'
+import { store } from '@/pinia'
 
 const tokenPlugin = (store) => {
   let token = localStorage.getItem('master-token')
@@ -35,3 +36,8 @@ export const useMasterStore = defineStore('master', {
   },
   plugins: [tokenPlugin],
 })
+
+// 防止提示安装pinia
+export function useMasterStoreWithOut() {
+  return useMasterStore(store)
+}

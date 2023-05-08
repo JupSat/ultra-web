@@ -5,10 +5,11 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:05:25
  * @LastEditors: JupSat
- * @LastEditTime: 2023-05-07 21:15:17
+ * @LastEditTime: 2023-05-08 22:07:17
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
-import store from '../store'
+import { useMasterStoreWithOut } from '@/pinia/modules/master'
+const store = useMasterStoreWithOut()
 
 const routes = [
   {
@@ -34,12 +35,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login') {
-    if (store.state.token) {
+  if (to.path !== '/master-home') {
+    if (store.token) {
       next()
     } else {
       console.log('主应用 - 未登录 去登陆')
-      next('/login')
+      next('/master-home')
     }
   } else {
     next()
