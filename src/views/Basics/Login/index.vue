@@ -97,7 +97,9 @@ import Register from './../Register'
 import Language from '@/components/Language'
 import { regUserName, regLoginPwd, getValidator } from '@/utils/validate'
 import { message } from '@/utils/message'
-// import microActions from '@/qiankun/qiankun-actions'
+// import actions from '@/qiankun/qiankun-actions'
+import { actions } from '@/micros'
+
 const router = useRouter()
 
 const state = reactive({
@@ -155,11 +157,11 @@ const submitForm = () => {
         const { code = null, data = '', msg = '' } = res || {}
         if (code === 0) {
           message(t('LoginSucJumping'))
+          actions.setGlobalState({ globalToken: data })
           formData.token = data
           useMasterStore().setToken(data)
           useUserStore().setUserInfo(formData)
           // 变更父项目参数token
-          // microActions.setGlobalState({ globalToken: data })
 
           let microPath = ''
           if (window.__POWERED_BY_QIANKUN__) {
@@ -201,7 +203,7 @@ const forgetPwd = () => {
 
 onMounted(() => {
   getGraphCaptcha()
-  // microActions.onGlobalStateChange((state, prevState) => {
+  // actions.onGlobalStateChange((state, prevState) => {
   //   // state: 变更后的状态; prevState: 变更前的状态
   //   console.log('子应用观察者：状态改变', state, prevState)
   // }, true)
