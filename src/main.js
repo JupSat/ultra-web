@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 11:23:56
  * @LastEditors: JupSat
- * @LastEditTime: 2023-05-04 12:45:54
+ * @LastEditTime: 2023-05-10 16:08:35
  */
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
@@ -32,4 +32,12 @@ app
   .use(ElementPlus, { size: 'small', zIndex: 3000, locale: locale })
   .mount('#app-base')
 
-start({ sandbox: { experimentalStyleIsolation: true } })
+start({
+  sandbox: {
+    // 默认开启预加载
+    prefetch: 'all',
+    // qiankun提供的样式隔离方法（严格模式）
+    strictStyleIsolation: true,
+    experimentalStyleIsolation: true,
+  },
+})
