@@ -86,8 +86,6 @@ export default {
 
 <script setup>
 import { reactive, defineEmits, ref, toRefs, onMounted } from 'vue'
-// import router from '@/router'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { loginApi, getGraphCaptchaApi } from '@/api/user'
 import { useUserStore } from '@/pinia/modules/user'
@@ -99,8 +97,6 @@ import { regUserName, regLoginPwd, getValidator } from '@/utils/validate'
 import { message } from '@/utils/message'
 // import actions from '@/qiankun/qiankun-actions'
 import { actions } from '@/micros'
-
-const router = useRouter()
 
 const state = reactive({
   showLogin: true,
@@ -161,15 +157,6 @@ const submitForm = () => {
           formData.token = data
           useMasterStore().setToken(data)
           useUserStore().setUserInfo(formData)
-          // 变更父项目参数token
-
-          let microPath = ''
-          if (window.__POWERED_BY_QIANKUN__) {
-            microPath = '/vue-mgt-tpl'
-          }
-          setTimeout(() => {
-            router.push({ path: microPath + '/overview' })
-          }, 2000)
         } else {
           if (msg === '验证码错误！') {
             message(t('captchaError'), 'warning')
@@ -203,10 +190,6 @@ const forgetPwd = () => {
 
 onMounted(() => {
   getGraphCaptcha()
-  // actions.onGlobalStateChange((state, prevState) => {
-  //   // state: 变更后的状态; prevState: 变更前的状态
-  //   console.log('子应用观察者：状态改变', state, prevState)
-  // }, true)
 })
 
 const { showLogin, loading } = toRefs(state)

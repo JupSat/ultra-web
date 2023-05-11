@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
     <div
-      v-if="useMasterStore.token"
+      v-if="useMasterStore().token"
       class="app-nav"
       :style="{
         width: isCollapse ? '0' : '200px',
@@ -80,7 +80,7 @@ const state = reactive({
   }),
   // 从环境变量中取参数
   appId: process.env.VUE_APP_MICRO_ENTRY,
-  appToken: computed(() => useMasterStore.token) || 'xxxxx',
+  appToken: computed(() => useMasterStore().token) || 'xxxxx',
   isShowMenu: false,
   isCollapse: false,
 })
@@ -101,8 +101,7 @@ onMounted(() => {
     // state: 变更后的状态; prevState: 变更前的状态
     console.log('主应用观察者：状态改变', state)
     let token = state.globalToken
-    store.commit('setToken', token)
-    console.log('jjjjj', store.state.token)
+    useMasterStore().setToken(token)
   })
 })
 
@@ -115,8 +114,8 @@ let menuChangeRouter = (row) => {
 }
 
 let loginOut = () => {
-  store.commit('loginOut')
-  router.push('/login')
+  useMasterStore().setToken('')
+  router.push('/master-home')
 }
 
 const showAppMenu = (appId) => {
