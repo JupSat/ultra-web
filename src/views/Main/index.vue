@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:11:32
  * @LastEditors: JupSat
- * @LastEditTime: 2023-05-08 21:50:17
+ * @LastEditTime: 2023-05-15 21:51:15
 -->
 <template>
   <div class="app-home" v-if="isShow">
@@ -26,7 +26,10 @@
         <span>减法等于:{{ subNum }}</span>
       </el-tab-pane>
       <el-tab-pane label="Chart" name="fourth">
-        <gauge-chart></gauge-chart>
+        <GaugeChart></GaugeChart>
+      </el-tab-pane>
+      <el-tab-pane label="Three.js" name="fifth">
+        <MyThree></MyThree>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -48,6 +51,7 @@ import Home from '@/views/Basics/Home'
 import Example from './../Example'
 import Example2 from './../Example2'
 import GaugeChart from '@/components/widgets/echarts/Gauge'
+import MyThree from '@/components/widgets/threeD/Demo'
 import useAdd from '@/hooks/useAdd.js' //引入自动hook
 import { useSub } from '@/hooks/useSub.js' //引入自动hook
 import { useMasterStore } from '@/pinia/modules/master'
