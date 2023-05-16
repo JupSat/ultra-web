@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-04-10 15:36:29
  * @LastEditors: JupSat
- * @LastEditTime: 2023-04-13 15:34:16
+ * @LastEditTime: 2023-04-27 15:58:44
 -->
 <template>
   <div class="chart-example">
@@ -96,6 +96,7 @@ export default {
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import * as echarts from 'echarts'
+import { debounce } from 'lodash'
 
 const setEChartsLine = () => {
   const chart1 = document.getElementById('chartId')
@@ -169,7 +170,7 @@ const setEChartsBar = () => {
     grid: {
       left: '3%',
       right: '4%',
-      bottom: '15%',
+      bottom: '22%',
       containLabel: true,
     },
     xAxis: {
@@ -257,15 +258,21 @@ const resize = () => {
 
 onMounted(() => {
   initECharts()
-  window.addEventListener('resize', () => {
-    resize()
-  })
+  window.addEventListener(
+    'resize',
+    debounce(() => {
+      resize()
+    }, 300)
+  )
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', () => {
-    resize()
-  })
+  window.removeEventListener(
+    'resize',
+    debounce(() => {
+      resize()
+    }, 300)
+  )
 })
 
 const getLastYearDates = () => {
