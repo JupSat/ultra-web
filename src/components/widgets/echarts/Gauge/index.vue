@@ -35,7 +35,7 @@ const setEChartsLine = () => {
         splitNumber: 8,
         axisLine: {
           lineStyle: {
-            width: 26,
+            width: 25,
             color: [
               [0.25, '#FF6E76'],
               [0.5, '#FDDD60'],
@@ -57,14 +57,14 @@ const setEChartsLine = () => {
           length: 12,
           lineStyle: {
             color: 'inherit',
-            width: 1,
+            width: 2,
           },
         },
         splitLine: {
-          length: 26,
+          length: 27,
           lineStyle: {
             color: 'white',
-            width: 2,
+            width: 24,
           },
           distance: -26,
         },
