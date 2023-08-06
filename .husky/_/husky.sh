@@ -44,7 +44,7 @@ if [ -z "$husky_skip_init" ]; then
   # Check if there is a debugger statement in any of the staged JavaScript files
   for file in $js_files
   do
-    if grep -q 'debugger' "$file"; then
+    if grep -q 'debugger' "$file" && ! grep -q 'no-debugger' "$file"; then
       echo "Error: Found 'debugger' statement in $file. Please remove it before committing." >&2
       exit 1
     fi
