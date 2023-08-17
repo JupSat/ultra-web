@@ -5,7 +5,7 @@
  * @email: jupsat@163.com
  * @Date: 2023-03-21 16:11:32
  * @LastEditors: JupSat
- * @LastEditTime: 2023-05-17 12:39:55
+ * @LastEditTime: 2023-08-17 22:13:31
 -->
 <template>
   <div class="app-home" v-if="isShow">
@@ -34,6 +34,9 @@
       <el-tab-pane label="g6" name="g6">
         <G6Example></G6Example>
       </el-tab-pane>
+      <el-tab-pane label="preview" name="preview">
+        <Preview></Preview>
+      </el-tab-pane>
     </el-tabs>
   </div>
   <div v-else>
@@ -56,6 +59,7 @@ import Example2 from './../Example2'
 import GaugeChart from '@/components/widgets/echarts/Gauge'
 import MyThree from '@/components/widgets/threeD/Demo'
 import G6Example from '@/components/widgets/G6'
+import Preview from '@/components/widgets/Preview'
 import useAdd from '@/hooks/useAdd.js' //引入自动hook
 import { useSub } from '@/hooks/useSub.js' //引入自动hook
 import { useMasterStore } from '@/pinia/modules/master'
@@ -75,6 +79,7 @@ const handleClick = (event) => {
   console.log('event', event)
   nextTick()
 }
+
 const isShow = computed(() => (useMasterStore().token ? true : false))
 </script>
 <style scoped>
