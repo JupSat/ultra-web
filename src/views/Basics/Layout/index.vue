@@ -43,6 +43,7 @@
     </div>
     <div v-if="isDemoModal">
       <Timeout></Timeout>
+      <CopyText></CopyText>
     </div>
     <div class="test-demo">
       <el-button type="text" @click="testDemo">{{
@@ -61,6 +62,7 @@ import { useMasterStore } from '@/pinia/modules/master'
 import { actions } from '@/micros'
 import AppList from '@/components/AppList'
 import Timeout from '@/demo/Timeout'
+import CopyText from '@/demo/CopyText'
 
 const router = useRouter()
 const route = useRoute()
