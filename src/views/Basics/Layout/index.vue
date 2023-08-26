@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
     <div
-      v-if="useMasterStore().token"
+      v-if="useMasterStore().token && !isDemoModal"
       class="app-nav"
       :style="{
         width: isCollapse ? '0' : '200px',
@@ -29,7 +29,7 @@
         </div>
       </template>
     </div>
-    <div class="app-content">
+    <div class="app-content" v-if="!isDemoModal">
       <div class="app-header-content" v-show="appToken">
         <AppList @show-menu="showAppMenu" />
         <div>{{ crumbsRouter }}</div>
@@ -41,21 +41,35 @@
         <div id="micro-container"></div>
       </div>
     </div>
+    <div v-if="isDemoModal">
+      <Timeout></Timeout>
+    </div>
+    <div class="test-demo">
+      <el-button type="text" @click="testDemo">{{
+        isDemoModal ? '返回主页' : '测试'
+      }}</el-button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, toRefs, computed, watch, onMounted } from 'vue'
+import { reactive, toRefs, computed, watch, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 // import { useStore } from 'vuex'
 import { useMasterStore } from '@/pinia/modules/master'
 
 import { actions } from '@/micros'
 import AppList from '@/components/AppList'
+import Timeout from '@/demo/Timeout'
 
 const router = useRouter()
 const route = useRoute()
 // const store = useStore()
+
+const isDemoModal = ref(false)
+const testDemo = () => {
+  isDemoModal.value = !isDemoModal.value
+}
 
 const routeList = [
   {
@@ -214,5 +228,9 @@ $leftWidth: 200px;
     background-color: rgb(26, 23, 56) !important;
     cursor: pointer;
   }
+}
+.test-demo {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
